@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Patient</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/styles/output.css" />
+
+</head>
+
+<body>
+
+    <%- include('./components/header', {detail : detail}) %>
+
+        <div class="my-[10rem]">
+
+            <div class="main-content-wrap page-container">
+                <div class="container">
+                    <%- include('./components/navbar') %>
+                        <div class="main-content">
+
+
+                            <div class="create-profile-box">
+
+                                <% if(res) { %>
+                                    <form class="form-primary" autocomplete="off"
+                                        action="/edit_patient/id/<%- res.ID %>" method="post" id="formData">
+                                        <div class="create-profile-inner">
+                                            <div class="title-holder">
+                                                <div class="icon-holder"
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <img src="/images/svg/people.svg" style="width: 20px;" alt="">
+                                                </div>
+                                                <h1>Edit Patient Profile</h1>
+                                                <p>Fill out the form below to edit a patient profile</p>
+                                            </div>
+
+                                            <div class="create-profile-form-section align-left">
+
+                                                <div class="two-cols-wrap">
+                                                    <div class="inputs-holder">
+                                                        <div class="input-holder" style="display: flex; width: 500px;">
+                                                            <label for="first-name" style="width: 200px;">First
+                                                                Name</label>
+
+                                                            <input type="text" name="first_name" id="first-name"
+                                                                maxlength="25" value="<%- res.FIRST_NAME %>" readonly />
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="margin-left: 20px; margin-top: 5px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                width="25" height="30" fill="currentColor"
+                                                                class="bi bi-pencil-square edit_btn"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                            </svg>
+
+                                                        </div>
+                                                        <div class="input-holder" style="display: flex; width: 500px;">
+                                                            <label for="last-name" style="width: 200px;">Last
+                                                                Name</label>
+
+                                                            <input type="text" name="last_name" id="last-name"
+                                                                maxlength="50" value="<%- res.LAST_NAME %>" readonly />
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="margin-left: 20px; margin-top: 5px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                width="25" height="30" fill="currentColor"
+                                                                class="bi bi-pencil-square edit_btn"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                            </svg>
+                                                        </div>
+
+                                                        <div class="input-holder" style="display: flex; width: 500px;">
+                                                            <label for="city" style="width: 200px;">City</label>
+
+                                                            <input type="text" name="city" maxlength="50"
+                                                                value="<%- res.CITY %>" readonly />
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="margin-left: 20px; margin-top: 5px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                width="25" height="30" fill="currentColor"
+                                                                class="bi bi-pencil-square edit_btn"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                            </svg>
+                                                        </div>
+
+                                                        <div class="input-holder" style="display: flex; width: 500px;">
+                                                            <label for="zipcode" style="width: 200px;">Zip Code</label>
+
+                                                            <input type="text" name="zip" maxlength="50"
+                                                                value="<%- res.ZIP %>" readonly />
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="margin-left: 20px; margin-top: 5px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                width="25" height="30" fill="currentColor"
+                                                                class="bi bi-pencil-square edit_btn"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                            </svg>
+                                                        </div>
+
+                                                        <div class="input-holder" style="display: flex; width: 500px;">
+                                                            <label for="state" style="width: 200px;">State</label>
+
+                                                            <input type="text" name="state" maxlength="50"
+                                                                value="<%- res._STATE %>" readonly />
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="margin-left: 20px; margin-top: 5px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                width="25" height="30" fill="currentColor"
+                                                                class="bi bi-pencil-square edit_btn"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                            </svg>
+                                                        </div>
+
+                                                        <div class="input-holder radio-buttons-holder"
+                                                            style="display: flex; width: 500px;">
+                                                            <label for="allergies-info"
+                                                                style="width: 130px;">Gender</label>
+                                                            <div class="radio-buttons-two-cols">
+                                                                <div class="custom-radio-button darker">
+                                                                    <input type="radio" name="gender" id="gender-male"
+                                                                        value="<%- res.GENDER %>" />
+                                                                    <label style="width: 200px;"><%- res.GENDER
+                                                                            %></label>
+                                                                </div>
+
+                                                                <!-- 
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    style="margin-left: 20px; margin-top: 10px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                    width="16" height="22" fill="currentColor"
+                                                                    class="bi bi-pencil-square edit_btn" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                                </svg> -->
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-holder date-field" id="date1"
+                                                            style="display: flex; width: 500px;">
+
+                                                            <label for="first-name" style="width: 130px;"> Date of Birth
+                                                            </label>
+                                                            <div class="date-border">
+
+                                                                <input id="month" name="month" type="number"
+                                                                    maxlength="2" size="1" value="<%- res.MONTH %>"
+                                                                    readonly />/
+                                                                <input id="day" name="day" type="number" maxlength="2"
+                                                                    size="1" value="<%- res.DAY %>" readonly />
+                                                                /
+                                                                <input id="year" name="year" type="text" maxlength="4"
+                                                                    pattern="\d*" min="1910" max="2100" size="2"
+                                                                    value="<%- res.YEAR %>" readonly />
+
+                                                            </div>
+                                                            <!-- 
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="margin-left: 20px; margin-top: 10px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                width="16" height="22" fill="currentColor"
+                                                                class="bi bi-pencil-square edit_btn" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                            </svg> -->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="create-profile-form-section">
+                                                <div class="section-title">
+                                                    <h2>Contact Information</h2>
+                                                </div>
+                                                <div class="two-cols-wrap">
+                                                    <div class="inputs-holder">
+                                                        <div class="input-holder" style="display: flex; width: 500px;">
+
+                                                            <label for="email-address" style="width: 200px;">Email
+                                                                Address</label>
+                                                            <input autocomplete="false" class="show-email" type="text"
+                                                                name="email" id="email-address" value="<%- res.EMAIL %>"
+                                                                maxlength="100" readonly />
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="margin-left: 20px; margin-top: 5px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                width="25" height="30" fill="currentColor"
+                                                                class="bi bi-pencil-square edit_btn"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                            </svg>
+
+                                                        </div>
+                                                        <div class="input-holder" style="display: flex; width: 500px;">
+                                                            <label for="phone-number" style="width: 200px;">Phone
+                                                                Number</label>
+                                                            <input autocomplete="nonono" type="text" name="phoneno"
+                                                                inputmode="numeric" value="<%- res.PHONENO %>"
+                                                                readonly />
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="margin-left: 20px; margin-top: 5px; color: rgb(108, 107, 107); cursor: pointer;"
+                                                                width="25" height="30" fill="currentColor"
+                                                                class="bi bi-pencil-square edit_btn"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="confirm-btns-wrap">
+                                            <a class="back-link" href="/">cancel &amp; close</a>
+
+                                            <button type="submit" class="btn btn-primary open-modal" id="submit_btn">
+                                                UPDATE PROFILE
+                                            </button>
+
+                                        </div>
+                                    </form>
+
+                                    <% } %>
+                                        <script>
+                                            let edit_btns = document.querySelectorAll('.edit_btn');
+                                            let previousBtn = null;
+
+                                            edit_btns.forEach((btn) => {
+                                                btn.addEventListener('click', async function (event) {
+                                                    if (previousBtn && previousBtn !== btn) {
+                                                        // If a previous button exists and is different from the current one
+                                                        let previousParentElem = previousBtn.parentElement;
+                                                        let previousInput = previousParentElem.querySelector('input');
+                                                        previousInput.style.borderColor = "";
+                                                        previousInput.style.borderRadius = "";
+                                                        previousInput.readOnly = true;
+                                                    }
+
+                                                    let parentElem = btn.parentElement;
+                                                    const inp_holder = parentElem.classList.contains('input-holder');
+
+                                                    if (inp_holder === true) {
+                                                        let input = parentElem.querySelector('input');
+                                                        input.readOnly = !input.readOnly;
+                                                        if (!input.readOnly) {
+                                                            input.focus();
+                                                            input.style.borderColor = "#9b9b9b";
+                                                            input.style.borderRadius = "10px";
+                                                            input.setSelectionRange(input.value.length, input.value.length);
+                                                        }
+                                                        else {
+                                                            input.style.borderColor = "";
+                                                            input.style.borderRadius = "";
+                                                        }
+                                                    }
+
+                                                    previousBtn = btn;
+                                                })
+                                            })
+                                        </script>
+
+                            </div>
+
+
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+</body>
+
+</html>

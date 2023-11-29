@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In Development</title>
+  <link rel="stylesheet" href="/styles/output.css" />
+</head>
+<style>
+  .rwd-table {
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .rwd-table tr:first-child {
+    border-top: none;
+    background: #2D4088;
+    color: #fff;
+  }
+
+  .rwd-table tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f9fc;
+  }
+
+  .rwd-table tr:nth-child(odd):not(:first-child) {
+    background-color: #ebf3f9;
+  }
+
+  .rwd-table th {
+    display: none;
+  }
+
+  .rwd-table td {
+    display: block;
+  }
+
+  .rwd-table td:first-child {
+    margin-top: .5em;
+  }
+
+  .rwd-table td:last-child {
+    margin-bottom: .5em;
+  }
+
+  .rwd-table td:before {
+    content: attr(data-th) ": ";
+    font-weight: bold;
+    width: 120px;
+    display: inline-block;
+    color: #000;
+  }
+
+  .rwd-table th,
+  .rwd-table td {
+    text-align: left;
+  }
+
+  .rwd-table {
+    color: #333;
+    border-radius: .4em;
+    overflow: hidden;
+  }
+
+  .rwd-table tr {
+    border-color: #bfbfbf;
+  }
+
+  .rwd-table th,
+  .rwd-table td {
+    padding: .5em 1em;
+  }
+
+  @media screen and (max-width: 601px) {
+    .rwd-table tr:nth-child(2) {
+      border-top: none;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    .rwd-table tr:hover:not(:first-child) {
+      background-color: #d8e7f3;
+    }
+
+    .rwd-table td:before {
+      display: none;
+    }
+
+    .rwd-table th,
+    .rwd-table td {
+      display: table-cell;
+      padding: .25em .5em;
+    }
+
+    .rwd-table th:first-child,
+    .rwd-table td:first-child {
+      padding-left: 0;
+    }
+
+    .rwd-table th:last-child,
+    .rwd-table td:last-child {
+      padding-right: 0;
+    }
+
+    .rwd-table th,
+    .rwd-table td {
+      padding: 1em !important;
+    }
+  }
+
+  .container {
+    display: block;
+    text-align: center;
+  }
+
+
+
+  @-webkit-keyframes leftRight {
+    0% {
+      -webkit-transform: translateX(0)
+    }
+
+    25% {
+      -webkit-transform: translateX(-10px)
+    }
+
+    75% {
+      -webkit-transform: translateX(10px)
+    }
+
+    100% {
+      -webkit-transform: translateX(0)
+    }
+  }
+
+  @keyframes leftRight {
+    0% {
+      transform: translateX(0)
+    }
+
+    25% {
+      transform: translateX(-10px)
+    }
+
+    75% {
+      transform: translateX(10px)
+    }
+
+    100% {
+      transform: translateX(0)
+    }
+  }
+</style>
+
+<body>
+
+  <%- include('./components/header', {detail : detail}) %>
+
+
+    <div class="main-content-wrap page-container my-[10rem]">
+      <div class="container">
+        <div class="sidebar">
+
+          <%- include('./components/navbar'); %>
+
+        </div>
+
+        <div class="main-content">
+          <!-- <% tables.forEach((table)=> { %>
+            <br> <br>
+            <h2 style="background-color: #eaea28; padding: 10px; border-radius: 5px; margin-bottom: 0;"><%= table.filename %></h2>
+            <table class="rwd-table">
+              <tbody>
+                <tr>
+                  <th>ID</th>
+                  <th>MEDICINE </th>
+                  <th>SIZE</th>
+                  <th>PRICE</th>
+                  <th>SIG (PER MD'S)</th>
+                </tr>
+                <% table.data.forEach((row)=> { %>
+                  <tr>
+                    <td> <%= row.ID %> </td>
+                    <td> <%= row.MEDICINE %> </td>
+                    <td> <%= row.SIZE %> </td>
+                    <td> <%= row.COST %> </td>
+                    <td> <%= row.SIG %> </td>
+                  </tr>
+                  <% }); %>
+              </tbody>
+            </table>
+            <% }); %> -->
+            <% tables.forEach((table) => { %>
+              <br> <br>
+              <h2 style="background-color: #eaea28; padding: 10px; border-radius: 5px; margin-bottom: 0;"><%= table.filename %></h2>
+              <table class="rwd-table">
+                  <tbody>
+                      <tr>
+                          <th>ID</th>
+                          <th>MEDICINE </th>
+                          <th>SIZE</th>
+                          <th>PRICE</th>
+                          <th>SIG (PER MD'S)</th>
+                      </tr>
+                      <% table.data.forEach((row) => { %>
+                          <tr>
+                              <td><%= row.ID %></td>
+                              <td><%= highlightText(row.MEDICINE) %></td>
+                              <td><%= row.SIZE %></td>
+                              <td><%= row.COST %></td>
+                              <td><%= highlightText(row.SIG) %></td>
+                          </tr>
+                      <% }); %>
+                  </tbody>
+              </table>
+          <% }); %>
+          
+          <% function highlightText(text) { %>
+            <% if (text && (text.includes('LOWER-MID POTENCY CORTICOSTEROID GROUP') || text.includes('MEDIUM POTENCY CORTICOSTEROID GROUP') || text.includes('LOW POTENCY CORTICOSTEROID GROUP') || text.includes('LEAST POTENT CORTICOSTEROID GROUP')  || text.includes('HIGH POTENCY CORTICOSTEROID GROUP'))) { %>
+                <span style="background-color: yellow; font-style: italic;"><%= text %></span>
+            <% } else { %>
+                <%= text %>
+            <% } %>
+        <% } %>
+        
+          
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

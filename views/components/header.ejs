@@ -1,0 +1,459 @@
+<header class="main-header">
+  <div class="container">
+    <div>
+      <a class="logo2" href="/"><img src="/images/nobleslogo.png" alt="NoblesVille" data-cy="site-logo"
+          class="full-logo h-[60px] w-[55px]" />
+        <img src="/images/nobleslogo.png" alt="NoblesVille" data-cy="mobile-site-logo" class="mobile-logo" /></a>
+    </div>
+
+    <ul style="position: relative; right: 80px; font-size: 14px; display: flex; gap: 15px;">
+      <li> Doctor: <%- detail.FIRST_NAME %> <%- detail.LAST_NAME %> </li>
+      <li>Pno.: <%- detail.CONTACT %></li>
+      <li>NPI: <%- detail.NPI %></li>
+    </ul>
+
+    <div class="nav-holder">
+      <ul class="header-nav no-style">
+
+        <li>
+          <a class="btn home-btn " style="display: flex; align-items: center; margin-right: 10px; border-radius: 50%; padding: 10px;" href="/create">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-prescription2" viewBox="0 0 16 16">
+              <path d="M7 6h2v2h2v2H9v2H7v-2H5V8h2V6Z"/>
+              <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v10.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 14.5V4a1 1 0 0 1-1-1V1Zm2 3v10.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V4H4ZM3 3h10V1H3v2Z"/>
+            </svg>
+          </a>
+        </li>
+
+        <li>
+          <a class="btn home-btn " style="display: flex; align-items: center; gap: 4px;"
+            data-cy="prescriber-patient-list-button" href="/">
+            <img src="/images/svg/people.svg" style="width: 20px;" alt="">
+            Patient List
+          </a>
+        </li>
+
+
+        <li>
+          <a data-cy="new-prescription-button" class="new-btn btn-primary" href="/create"><span class="text"><span
+                class="hide-text-on-mobile">CREATE </span>NEW PRESCRIPTION</span>
+          </a>
+        </li>
+
+        <li
+          style="background-color: rgb(252, 253, 251); padding: 5px; border-radius: 30px; padding: 2px; padding-bottom: 6px;">
+          <a href="/logout" data-cy="prescriber-profile-menu-logout" class="btn">Log Out</a>
+        </li>
+
+        <li
+          style="background-color: rgb(252, 253, 251); padding: 5px; border-radius: 30px; padding: 2px; padding-bottom: 6px;">
+          <a href="javascript:void(0)" class="btn" id="contact_btn">Contact us</a>
+        </li>
+
+        <li>
+          <div class="group ">
+            <button class="profile-btn dropdown-trigger-nav menu-btn"
+              style="display: flex; align-items: center; gap: 4px;">
+              <img src="/images/svg/settings.svg" style="width: 20px;" alt="">
+              Menu
+            </button>
+            <div class="hidden group-hover:block absolute w-56" style="margin-left: -50px; padding-top: 10px;">
+              <div class="hide-padding bg-white ">
+                <div class="dropdown-title text-2xl font-semibold my-2 " style="display: flex;">
+                  <img src="/images/settings.svg" style="width: 15px;" alt="">
+                </div>
+                <nav>
+                  <ul class="nav-menu no-style space-y-4">
+                    <li class=""
+                      style="background-color: rgb(252, 253, 251); padding: 5px; border-radius: 30px; padding: 2px; padding-bottom: 6px;">
+                      <a href="/edit-profile" data-cy="prescriber-profile-menu-edit-profile" class="">My
+                        Profile</a>
+                    </li>
+                    <li class=""
+                      style="background-color: rgb(252, 253, 251); padding: 5px; border-radius: 30px; padding: 2px; padding-bottom: 6px;">
+                      <a href="/change_password" data-cy="prescriber-profile-menu-change-password" class="">Change
+                        Password</a>
+                    </li>
+
+                    <li class=""
+                      style="background-color: rgb(252, 253, 251); padding: 5px; border-radius: 30px; padding: 2px; padding-bottom: 6px;">
+                      <a href="/edit-preferences" data-cy="prescriber-profile-menu-edit-preferences" class="">Edit
+                        Preferences</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.getElementById('contact_btn').addEventListener('click', function () {
+    const patient_div = document.getElementsByClassName('patient_list')[0];
+    const overlay = document.getElementsByClassName('p_overlay')[0];
+    patient_div.style.display = 'block';
+    overlay.style.display = 'block';
+    // textarea_container.style.display = 'block';
+
+  });
+</script>
+
+<style>
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spin {
+    animation: spin 2s linear infinite;
+  }
+
+  .patient_list {
+    display: none;
+    padding: 10px;
+    background-color: white;
+    height: 360px;
+    width: 950px;
+    position: fixed;
+    z-index: 1;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f5f5f5;
+  }
+
+  .patient_list::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .patient_list::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+  }
+
+  .patient_list::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+
+  .patient_list {
+    scrollbar-color: #888 #f5f5f5;
+  }
+
+  .centered-content {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85%;
+  }
+
+  .p_overlay {
+    display: none;
+    /* display: block; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(82, 82, 82, 0.096);
+    z-index: 1;
+    transition: opacity 0.7s;
+  }
+
+  .hide_list {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  /* text area */
+
+  .textarea-container {
+    display: none;
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    margin: 0 auto;
+    bottom: 5%;
+    z-index: 1;
+    padding: 15px;
+    border-radius: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 950px;
+  }
+
+  .textarea-container textarea {
+    height: 60px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: vertical;
+  }
+
+  .textarea-container textarea:focus {
+    border-color: #007BFF;
+  }
+</style>
+
+<div class="p_overlay"></div>
+<div class="patient_list">
+  <div class="hide_list">x</div>
+  <table class="patient-records-table table-v5" id="data-table">
+    <thead>
+      <tr>
+        <th class="name">First Name</th>
+        <th class="name">Last Name</th>
+        <th class="dob" colspan="2">Date of Birth</th>
+        <th class="empty">Contact</th>
+        <th class="table-name">MAIL</th>
+      </tr>
+    </thead>
+    <tbody id="show_patient_res">
+    </tbody>
+
+  </table>
+
+  <div class="centered-content" style="display: flex;">
+    <a href="javascript:void(0)" id="load_patients" class="btn btn-primary">Click to load Patients </a>
+  </div>
+
+  <div class="centered-content">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat spin"
+      viewBox="0 0 16 16">
+      <path
+        d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+      <path fill-rule="evenodd"
+        d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+    </svg>
+  </div>
+
+</div>
+
+<div class="textarea-container">
+  <div id="showSelected"></div>
+  <textarea placeholder="Write E-mail content here..." id="mail_text"></textarea>
+  <a href="javascript:void(0)" onclick="send_mail()" class="btn btn-primary" id="confirm_mail"> Confirm and Mail </a>
+</div>
+
+<script>
+  const list_res = document.getElementById('show_patient_res');
+  const centered_content = document.getElementsByClassName('centered-content');
+  const tr_len = list_res.getElementsByTagName('tr').length;
+
+  document.getElementById("load_patients").addEventListener("click", async function () {
+    centered_content[0].style.display = 'none';
+    centered_content[1].style.display = 'flex';
+    try {
+      const response = await fetch("/contact_us");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+
+      if (data.list) {
+        centered_content[1].style.display = "none";
+
+        data.list.forEach(function (row) {
+          var row_data = document.createElement("tr");
+          row_data.className = "row_data";
+          row_data.setAttribute('data-firstname', `${row.FIRST_NAME}`)
+          row_data.setAttribute('data-lastname', `${row.LAST_NAME}`)
+          row_data.setAttribute('data-dob', `${row.DAY + '/' + row.MONTH + '/' + row.YEAR}`)
+          row_data.setAttribute('data-contact', `${row.PHONENO}`)
+
+          var firstNameCell = document.createElement("td");
+          firstNameCell.className = "table-name firstname";
+          firstNameCell.textContent = row.FIRST_NAME;
+          row_data.appendChild(firstNameCell);
+
+          var lastNameCell = document.createElement("td");
+          lastNameCell.className = "table-name lastname";
+          lastNameCell.textContent = row.LAST_NAME;
+          row_data.appendChild(lastNameCell);
+
+          var dobCell = document.createElement("td");
+          dobCell.className = "dob";
+          dobCell.colSpan = 2;
+          dobCell.textContent = row.DAY + '/' + row.MONTH + '/' + row.YEAR;
+          row_data.appendChild(dobCell);
+
+          var phoneCell = document.createElement("td");
+          phoneCell.className = "table-name contact";
+          phoneCell.textContent = row.PHONENO;
+          row_data.appendChild(phoneCell);
+
+          var actionCell = document.createElement("td");
+          actionCell.className = "empty";
+          actionCell.innerHTML = `
+          <div class="btn-item">
+            <a class="btn btn-small-view" href="javascript:void(0)" data-patientid="${row.ID}" onclick="select_patient(this)"><span class="text"> Select </span></a>
+          </div>
+        `;
+          row_data.appendChild(actionCell);
+
+          list_res.appendChild(row_data);
+        });
+      }
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  });
+
+
+
+</script>
+
+<script>
+
+  let selectedElement = null;
+  const textarea_container = document.querySelector('.textarea-container');
+  const showSelected = document.getElementById('showSelected');
+
+  const select_patient = (elem) => {
+    const patient_id = elem.getAttribute('data-patientid');
+
+    if (selectedElement === elem) {
+      elem.textContent = 'Select';
+      textarea_container.style.display = "none";
+      selectedElement.parentElement.parentElement.classList.remove('selected-row');
+      document.getElementById('confirm_mail').textContent = "Confirm and Mail";
+      selectedElement = null;
+
+      // Show all rows
+      const rows = document.getElementsByClassName('row_data');
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = "table-row";
+      }
+      showSelected.innerHTML = '';
+
+    } else {
+      if (selectedElement) {
+        selectedElement.textContent = 'Select';
+        selectedElement.parentElement.parentElement.classList.remove('selected-row');
+        document.getElementById('confirm_mail').textContent = "Confirm and Mail";
+      }
+
+      textarea_container.style.display = "block";
+      elem.textContent = 'Selected';
+      selectedElement = elem;
+      selectedElement.parentElement.parentElement.classList.add('selected-row');
+
+      const firstname = selectedElement.parentElement.parentElement.parentElement.querySelector('.firstname');
+      const lastname = selectedElement.parentElement.parentElement.parentElement.querySelector('.lastname');
+      const dob = selectedElement.parentElement.parentElement.parentElement.querySelector('.dob');
+      const contact = selectedElement.parentElement.parentElement.parentElement.querySelector('.contact');
+
+      showSelected.innerHTML = `<div style="display: flex; "> 
+      <p style="font-size: 15px;"> Contacting Pharmacy in regards to </p> &nbsp; &nbsp;
+      <p style="font-size: 15px;"> <span style="font-weight:bold;"> Patient: </span> ${firstname.textContent} ${lastname.textContent} </p> &nbsp; &nbsp;&nbsp;
+      <p style="font-size: 15px;"> <span style="font-weight:bold;"> DOB: </span> ${dob.textContent}  </p> &nbsp; &nbsp;&nbsp; &nbsp;
+      <p style="font-size: 15px;"> <span style="font-weight:bold;"> Contact: </span> ${contact.textContent}  </p>  &nbsp; &nbsp;&nbsp; &nbsp;
+      </div>`;
+
+      // Hide other rows
+      const rows = document.getElementsByClassName('row_data');
+      for (let i = 0; i < rows.length; i++) {
+        if (rows[i].querySelector('.selected-row')) {
+          rows[i].style.display = "table-row";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+
+
+  function send_mail() {
+    if (selectedElement) {
+      const patient_selected_id = selectedElement.getAttribute('data-patientid');
+      const text_mail = document.getElementById('mail_text');
+
+      document.getElementById('confirm_mail').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat spin"
+      viewBox="0 0 16 16">
+      <path
+        d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+      <path fill-rule="evenodd"
+        d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+    </svg>`;
+
+      const data = {
+        id: patient_selected_id,
+        text: text_mail.value
+      };
+      const url = `/mail/patient/id/${patient_selected_id}`;
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+
+      fetch(url, requestOptions)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.success === true) {
+            document.getElementById('confirm_mail').textContent = "Mail Sent";
+          } else {
+            document.getElementById('confirm_mail').textContent = "Failed! Send Again";
+          }
+
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  }
+</script>
+
+<script>
+  const list = document.getElementsByClassName('patient_list')[0];
+  const p_overlay = document.getElementsByClassName('p_overlay')[0];
+  const hide = document.getElementsByClassName('hide_list')[0];
+  const textArea = document.getElementsByClassName('textarea-container')[0];
+
+  hide.addEventListener('click', function () {
+    if (selectedElement) {
+      selectedElement.textContent = 'Select';
+      selectedElement.parentElement.parentElement.classList.remove('selected-row');
+      selectedElement = null;
+    }
+
+    document.getElementById('confirm_mail').textContent = "Confirm and Mail";
+    textArea.style.display = 'block';
+
+    const rows = document.getElementsByClassName('row_data');
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].style.display = 'table-row';
+    }
+
+    textArea.style.display = "none";
+    list.style.display = 'none';
+    p_overlay.style.display = 'none';
+  });
+
+</script>
