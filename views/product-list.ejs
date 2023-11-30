@@ -170,30 +170,6 @@
         </div>
 
         <div class="main-content">
-          <!-- <% tables.forEach((table)=> { %>
-            <br> <br>
-            <h2 style="background-color: #eaea28; padding: 10px; border-radius: 5px; margin-bottom: 0;"><%= table.filename %></h2>
-            <table class="rwd-table">
-              <tbody>
-                <tr>
-                  <th>ID</th>
-                  <th>MEDICINE </th>
-                  <th>SIZE</th>
-                  <th>PRICE</th>
-                  <th>SIG (PER MD'S)</th>
-                </tr>
-                <% table.data.forEach((row)=> { %>
-                  <tr>
-                    <td> <%= row.ID %> </td>
-                    <td> <%= row.MEDICINE %> </td>
-                    <td> <%= row.SIZE %> </td>
-                    <td> <%= row.COST %> </td>
-                    <td> <%= row.SIG %> </td>
-                  </tr>
-                  <% }); %>
-              </tbody>
-            </table>
-            <% }); %> -->
             <% tables.forEach((table) => { %>
               <br> <br>
               <h2 style="background-color: #eaea28; padding: 10px; border-radius: 5px; margin-bottom: 0;"><%= table.filename %></h2>
@@ -221,7 +197,7 @@
           
           <% function highlightText(text) { %>
             <% if (text && (text.includes('LOWER-MID POTENCY CORTICOSTEROID GROUP') || text.includes('MEDIUM POTENCY CORTICOSTEROID GROUP') || text.includes('LOW POTENCY CORTICOSTEROID GROUP') || text.includes('LEAST POTENT CORTICOSTEROID GROUP')  || text.includes('HIGH POTENCY CORTICOSTEROID GROUP'))) { %>
-                <span style="background-color: yellow; font-style: italic;"><%= text %></span>
+                <span style="background-color: yellow; font-style: italic;font-size: 1.3rem; font-weight: bold;"><%= text %></span>
             <% } else { %>
                 <%= text %>
             <% } %>
