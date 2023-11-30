@@ -7,6 +7,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>In Development</title>
   <link rel="stylesheet" href="/styles/output.css" />
+  <style>
+    .category-holder {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      display: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: flex;
+      flex-direction: column;
+      background: white;
+      z-index: 9;
+      padding: 0px 8px;
+      width: 100%;
+    }
+    
+    .dropdown-content a:last-child {
+      border-top: 0px ;
+      box-shadow: none;
+    }
+    .dropdown-content a:first-child {
+      border-bottom: 0px;
+      box-shadow: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -15,10 +54,13 @@
     <div class="page-container create-prescription-content-wrap">
       <div class="container">
         <div class="back-link-holder">
-          <a href="/" style="display: flex; gap: 10px;"> 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
-              <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+          <a href="/" style="display: flex; gap: 10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+              <path fill-rule="evenodd"
+                d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
             </svg>
             Return to Dashboard</a>
         </div>
@@ -79,22 +121,46 @@
                   <h3>Dry, Cracking Skin</h3>
                 </a>
               </div>
-              <div class="category-holder inline" data-medicine="Eczema Psoriasis">
-                <a href="/select?href=eczema_psoriasis">
+
+              <div class="dropdown category-holder inline" data-medicine="Eczema Psoriasis">
+                <a>
                   <div class="icon-holder">
                     <img src="/images/icons/Eczema_Psoriasis.png" alt="" />
                   </div>
-                  <h3>Eczema Psoriasis With Corticosteroids</h3>
+                  <h3>Eczema Psoriasis</h3>
                 </a>
+                <div class="dropdown-content">
+                  <a href="/select?href=eczema_psoriasis">
+                    <div class="icon-holder">
+                      <img src="/images/icons/Eczema_Psoriasis.png" alt="" />
+                    </div>
+                    <h3>With Corticosteroids</h3>
+                  </a>
+                  <a href="/select?href=eczema_psoriasis_without_corticosteroids">
+                    <div class="icon-holder">
+                      <img src="/images/icons/Eczema_Psoriasis.png" alt="" />
+                    </div>
+                    <h3>Without Corticosteroids</h3>
+                  </a>
+                </div>
               </div>
-              <div class="category-holder inline" data-medicine="Eczema Psoriasis">
-                <a href="/select?href=eczema_psoriasis_without_corticosteroids">
-                  <div class="icon-holder">
-                    <img src="/images/icons/Eczema_Psoriasis.png" alt="" />
-                  </div>
-                  <h3>Eczema Psoriasis Without Corticosteroids</h3>
-                </a>
-              </div>
+              <!-- <div class="category-holder inline" data-medicine="Eczema Psoriasis">
+                  <a href="/select?href=eczema_psoriasis">
+                    <div class="icon-holder">
+                      <img src="/images/icons/Eczema_Psoriasis.png" alt="" />
+                    </div>
+                    <h3>Eczema Psoriasis With Corticosteroids</h3>
+                  </a>
+                </div>
+                <div class="category-holder inline" data-medicine="Eczema Psoriasis">
+                  <a href="/select?href=eczema_psoriasis_without_corticosteroids">
+                    <div class="icon-holder">
+                      <img src="/images/icons/Eczema_Psoriasis.png" alt="" />
+                    </div>
+                    <h3>Eczema Psoriasis Without Corticosteroids</h3>
+                  </a>
+                </div> -->
+
               <div class="category-holder inline" data-medicine="Facial Peels">
                 <a href="/select?href=facial_peels">
                   <div class="icon-holder">
@@ -335,6 +401,14 @@
             }
           });
         });
+
+
+        function showSubTabs(medicine) {
+          // Assuming you want different sub-tabs for each medicine
+          const subTabsContainer = document.getElementById('subTabs');
+
+          subTabsContainer.classList.remove('hidden');
+        }
       });
     </script>
 
