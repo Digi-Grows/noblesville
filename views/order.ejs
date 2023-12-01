@@ -126,16 +126,21 @@
                                                 <a class="btn btn-small create-btn warn" href="javascript:void(0)"
                                                     data-patient-id="<%- order_result.PATIENT_ID %>"
                                                     data-day="<%- order_result.DAY %>"
-                                                    data-time="<%- order_result.TIME_STAMP %>"
-                                                    onclick="delete_pres(this)">
-                                                    <span class="text">Discontinue Prescription</span>
-                                                    <span class="icon icon-close icon-dark2"></span>
+                                                    data-time="<%- order_result.TIME_STAMP %>" <% if
+                                                    (order_result.isPrescriptionValid) { %>
+                                                    onclick="delete_pres(this)"
+                                                    <% } else { %>
+                                                        onclick="return false;"
+                                                        <% } %>
+                                                            <span class="text">
+                                                                <% if (order_result.isPrescriptionValid) { %>
+                                                                    Discontinue Prescription
+                                                                    <% } else { %>
+                                                                        Discontinued
+                                                                        <% } %>
+                                                            </span>
+                                                            <span class="icon icon-close icon-dark2"></span>
                                                 </a>
-                                                <!-- <a class="btn btn-small create-btn warn"
-                                                    href="/delete_prescription/<%- order_result.PATIENT_ID %>?day=<%- order_result.DAY %>&time=<%- order_result.TIME_STAMP %>">
-                                                    <span class="text">DELETE PRESCRIPTION</span>
-                                                    <span class="icon icon-close icon-dark2"></span>
-                                                </a> -->
                                             </div>
                                         </div>
                                     </div>

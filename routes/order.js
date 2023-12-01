@@ -20,13 +20,12 @@ route.get('/:id', async (req, res) => {
             const patient_id = req.params.id;
             const utc = req.query.day + ' ' + req.query.time;
 
-            const order_data = `SELECT PATIENT_ID, DATE_FORMAT(UTC, '%Y-%m-%d') AS DAY, TIME_FORMAT(UTC, '%H:%i:%s') AS TIME_STAMP, REFILLS, MEDICINE, MED_TYPE, SIZE, INSTRUCTIONS, PATIENT_FIRSTNAME, PATIENT_LASTNAME, PATIENT_EMAIL, PHONE_NO, DATE, MONTH, YEAR, GENDER, FORMULA_ID FROM PATIENT_INFO WHERE PATIENT_ID = ? AND UTC = ?`;
+            const order_data = `SELECT PATIENT_ID, DATE_FORMAT(UTC, '%Y-%m-%d') AS DAY, TIME_FORMAT(UTC, '%H:%i:%s') AS TIME_STAMP, REFILLS, MEDICINE, MED_TYPE, SIZE, INSTRUCTIONS, PATIENT_FIRSTNAME, PATIENT_LASTNAME, PATIENT_EMAIL, PHONE_NO, DATE, MONTH, YEAR, GENDER, FORMULA_ID, isPrescriptionValid FROM PATIENT_INFO WHERE PATIENT_ID = ? AND UTC = ?`;
             const order_result = await queryDB(order_data, [patient_id, utc]);
 
             if (order_result.length > 0) {
                 const patient_records_query = `SELECT ALLERGIES, DATE_FORMAT(UTC, '%Y-%m-%d') AS ADDED_DATE, TIME_FORMAT(UTC, '%H:%i:%s') AS ADDED_TIME FROM PATIENTS_RECORDS WHERE ID = ?`;
                 const result = await queryDB(patient_records_query, [patient_id]);
-
                 return res.render('order', {
                     order_result: order_result[0],
                     result: result[0] || '',
