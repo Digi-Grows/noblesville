@@ -28,7 +28,7 @@
       display: none;
     }
 
-    .dropdown:hover .dropdown-content {
+    .dropdown.active .dropdown-content {
       display: flex;
       flex-direction: column;
       background: white;
@@ -36,11 +36,12 @@
       padding: 0px 8px;
       width: 100%;
     }
-    
+
     .dropdown-content a:last-child {
-      border-top: 0px ;
+      border-top: 0px;
       box-shadow: none;
     }
+
     .dropdown-content a:first-child {
       border-bottom: 0px;
       box-shadow: none;
@@ -122,8 +123,8 @@
                 </a>
               </div>
 
-              <div class="dropdown category-holder inline" data-medicine="Eczema Psoriasis">
-                <a>
+              <div id="eczemaPsoriasisTab" class="dropdown category-holder inline" data-medicine="Eczema Psoriasis" onclick="toggleTabs('eczemaPsoriasisTab')">
+                <a href="javascript:void(0)" >
                   <div class="icon-holder">
                     <img src="/images/icons/Eczema_Psoriasis.png" alt="" />
                   </div>
@@ -403,13 +404,11 @@
         });
 
 
-        function showSubTabs(medicine) {
-          // Assuming you want different sub-tabs for each medicine
-          const subTabsContainer = document.getElementById('subTabs');
-
-          subTabsContainer.classList.remove('hidden');
-        }
       });
+      function toggleTabs(divId) {
+        const mainTab = document.getElementById(divId);
+        mainTab.classList.toggle('active');
+      };
     </script>
 
 </body>
