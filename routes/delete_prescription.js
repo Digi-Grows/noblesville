@@ -11,9 +11,9 @@ route.get('/:id', async (req, res) => {
     // console.log(patientid+ ' ' + day + ' ' + time);
 
     // const delete_data = `DELETE FROM PATIENT_INFO WHERE PATIENT_ID = ? AND UTC = ?`;
-    const discontinuePrescription = `UPDATE PATIENT_INFO SET isPrescriptionValid = 0 WHERE PATIENT_ID = ? AND UTC = ?`;
+    const discontinuePrescription = `UPDATE PATIENT_INFO SET isPrescriptionValid = 0, UTC = ? WHERE PATIENT_ID = ? AND UTC = ?`;
 
-    sql_conn.query(discontinuePrescription, [patientid, utc], async (err) => {
+    sql_conn.query(discontinuePrescription, [utc, patientid, utc], async (err) => {
         if(err) {
             res.send('Error while deleting Prescription Record');
             return;
