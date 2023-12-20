@@ -34,8 +34,22 @@
                   <img src="/images/svg/people.svg" style="width: 20px;" alt="">
                 </div>
                 <h2 class="h1-title">Select the Prescription</h2>
-                <p>Select the prescription from the <%- table %></p>
+                <!-- <p>Select the prescription from the <%- table %></p> -->
                 <!-- <p>Select the prescription from the options below</p> -->
+                <p>Select the prescription from the <%= (() => {
+                  function capitalizeFirstLetter(str) {
+                      return str.charAt(0).toUpperCase() + str.slice(1);
+                  }
+              
+                  function formatTable(table) {
+                      // Split the table names by underscores and capitalize the first letter of each part
+                      const formattedTable = table.split('_').map(capitalizeFirstLetter).join(' ');
+                      return formattedTable;
+                  }
+              
+                  // Call the formatTable function with the provided 'table' variable
+                  return formatTable(table);
+              })() %></p>
               </div>
               <div class="select-ingredients-wrap">
                 <ul class="tab-links"></ul>
@@ -178,7 +192,6 @@
 
         e.appendChild(div);
       });
-
       
       // const medicineElements = document.querySelectorAll('.medicine');
 
@@ -188,6 +201,26 @@
       // });
 
     </script>
+    <style>
+      .highlight {
+        color: red;
+        padding-left: 5px;
+      }
+    </style>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Function to add ** before and after the word and change its color
+          function highlightTopMover() {
+              var bodyContent = document.body.innerHTML;
+              var highlightedContent = bodyContent.replace(/TOP MOVER/g, '<span style="color: red; padding-left:10px">** TOP MOVER **</span>');
+              document.body.innerHTML = highlightedContent;
+          }
+  
+          // Call the function
+          highlightTopMover();
+      });
+  </script>
 
 </body>
 
