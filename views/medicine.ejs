@@ -171,6 +171,18 @@
     </script>
 
     <script>
+        function highlightTopMover() {
+            var medTitles = document.querySelectorAll('.med_title');
+
+            medTitles.forEach(function(medTitle) {
+                var content = medTitle.innerHTML;
+                var highlightedContent = content.replace(/TOP MOVER/g, '<span style="color: red;padding-left:10px;">**TOP MOVER**</span>');
+                medTitle.innerHTML = highlightedContent;
+            });
+        }
+
+        // Call the function
+        highlightTopMover();
       let medicine = document.querySelectorAll('.medicine');
 
       medicine.forEach((e) => {
@@ -201,26 +213,6 @@
       // });
 
     </script>
-    <style>
-      .highlight {
-        color: red;
-        padding-left: 5px;
-      }
-    </style>
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          // Function to add ** before and after the word and change its color
-          function highlightTopMover() {
-              var bodyContent = document.body.innerHTML;
-              var highlightedContent = bodyContent.replace(/TOP MOVER/g, '<span style="color: red; padding-left:10px">** TOP MOVER **</span>');
-              document.body.innerHTML = highlightedContent;
-          }
-  
-          // Call the function
-          highlightTopMover();
-      });
-  </script>
 
 </body>
 
