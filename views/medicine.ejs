@@ -15,13 +15,16 @@
     <div class="page-container create-prescription-content-wrap">
       <div class="container">
         <div class="back-link-holder">
-            <a href="/create" style="display: flex; gap: 10px;">
-            
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
-              <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+          <a href="/create" style="display: flex; gap: 10px;">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+              <path fill-rule="evenodd"
+                d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
             </svg>
-            
+
             Return to Previous Page</a>
         </div>
         <div class="prescription-tabs-wrap">
@@ -36,20 +39,20 @@
                 <h2 class="h1-title">Select the Prescription</h2>
                 <!-- <p>Select the prescription from the <%- table %></p> -->
                 <!-- <p>Select the prescription from the options below</p> -->
-                <p>Select the prescription from the <%= (() => {
-                  function capitalizeFirstLetter(str) {
-                      return str.charAt(0).toUpperCase() + str.slice(1);
-                  }
-              
-                  function formatTable(table) {
-                      // Split the table names by underscores and capitalize the first letter of each part
-                      const formattedTable = table.split('_').map(capitalizeFirstLetter).join(' ');
-                      return formattedTable;
-                  }
-              
-                  // Call the formatTable function with the provided 'table' variable
-                  return formatTable(table);
-              })() %></p>
+                <p>Select the prescription from the <%= (()=> {
+                    function capitalizeFirstLetter(str) {
+                    return str.charAt(0).toUpperCase() + str.slice(1);
+                    }
+
+                    function formatTable(table) {
+                    // Split the table names by underscores and capitalize the first letter of each part
+                    const formattedTable = table.split('_').map(capitalizeFirstLetter).join(' ');
+                    return formattedTable;
+                    }
+
+                    // Call the formatTable function with the provided 'table' variable
+                    return formatTable(table);
+                    })() %></p>
               </div>
               <div class="select-ingredients-wrap">
                 <ul class="tab-links"></ul>
@@ -76,7 +79,7 @@
 
                       <form
                         action='/submit?hrefcat=<%- category_res[i].TYPE %>&hreftab=<%- table %>&hrefid=<%- category_res[i].ID %>'
-                        class="details-wrap" method="post">
+                        class="details-wrap" method="post" id="select-form-<%- i %>">
                         <div class="medication-info-selection length-change" id="wrap_details">
                           <!-- <div class="selection-item small-item">
                               <label>
@@ -96,15 +99,16 @@
                             <label>Vehicle</label><input class="" type="text" name="Vehicle" readonly=""
                               value='<%- category_res[i].TYPE %>' />
                           </div>
-<!-- 
-	                         <div class="selection-item size-item">
-                            <label>Size</label><select name="size" class="size" onclick="price_validation(this)">
-                               <option value="<%- category_res[i].SIZE %>" class="selected_size"> 
-                                 <%- category_res[i].SIZE %>  
-                               </option> 
+
+                          <div class="selection-item size-item">
+                            <label>Size</label><select name="size" class="size"
+                              onclick="price_validation(this, <%- i %>)">
+                              <option value="<%- category_res[i].SIZE %>" class="selected_size">
+                                <%- category_res[i].SIZE %>
+                              </option>
 
                             </select>
-                          </div>              -->
+                          </div>
 
                         </div>
                         <div class="btns-holder">
@@ -118,7 +122,6 @@
                           </div>
                         </div>
                       </form>
-
                     </div>
                   </div>
                   <% } %>
@@ -132,7 +135,7 @@
     </div>
 
     <script>
-      function price_validation(size_elem) {
+      function price_validation(size_elem, form_id, category_res) {
         const medicationBox = size_elem.closest('.medication-box');
         const size = medicationBox.querySelector('.size');
         const cost = medicationBox.querySelector('.cost');
@@ -164,6 +167,18 @@
             }
 
             cost.textContent = cost.getAttribute('data-price');
+
+            var form = document.getElementById('select-form-' + form_id);
+
+            if (form.action.includes('&size=')) {
+              // If it exists, update its value
+              form.action = form.action.replace(/(&size=)[^&]*/, '$1' + encodeURIComponent(size.value));
+            } else {
+              // If it doesn't exist, add it
+              form.action = form.action + '&size=' + size.value;
+            }
+            console.log('form.action', form.action, size.value, selectedOption, form.id);
+
           };
         }
       }
@@ -171,18 +186,18 @@
     </script>
 
     <script>
-        function highlightTopMover() {
-            var medTitles = document.querySelectorAll('.med_title');
+      function highlightTopMover() {
+        var medTitles = document.querySelectorAll('.med_title');
 
-            medTitles.forEach(function(medTitle) {
-                var content = medTitle.innerHTML;
-                var highlightedContent = content.replace(/TOP MOVER/g, '<span style="color: red;padding-left:10px;">**TOP MOVER**</span>');
-                medTitle.innerHTML = highlightedContent;
-            });
-        }
+        medTitles.forEach(function (medTitle) {
+          var content = medTitle.innerHTML;
+          var highlightedContent = content.replace(/TOP MOVER/g, '<span style="color: red;padding-left:10px;">**TOP MOVER**</span>');
+          medTitle.innerHTML = highlightedContent;
+        });
+      }
 
-        // Call the function
-        highlightTopMover();
+      // Call the function
+      highlightTopMover();
       let medicine = document.querySelectorAll('.medicine');
 
       medicine.forEach((e) => {
@@ -204,7 +219,7 @@
 
         e.appendChild(div);
       });
-      
+
       // const medicineElements = document.querySelectorAll('.medicine');
 
       // medicineElements.forEach((elem) => {

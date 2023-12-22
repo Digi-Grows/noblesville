@@ -20,12 +20,12 @@ for (let i = 0; i < 2; i++) {
     opt.className = 'selected_size';
     product_price_number += product_price_number_static;
     opt.value = product_price_number + size_type; opt.textContent = product_price_number + size_type;
-    size.appendChild(opt);    
+    size.appendChild(opt);
 }
 
 const selected_size = document.getElementsByClassName('selected_size');
 size.addEventListener('change', () => {
-if (selected_size[0].selected) {
+    if (selected_size[0].selected) {
         price_digits = "35"; price.textContent = '$' + price_digits;
     }
     else if (selected_size[1].selected) {
@@ -35,3 +35,18 @@ if (selected_size[0].selected) {
         price_digits = "90"; price.textContent = '$' + price_digits;
     }
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    var urlParams = new URLSearchParams(window.location.search);
+
+    // Get the value of the 'size' parameter
+    var sizeValue = urlParams.get('size');
+
+    if(sizeValue){
+        size.value = sizeValue
+        var event = new Event('change');
+        size.dispatchEvent(event);
+    }
+
+});
