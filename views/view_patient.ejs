@@ -142,160 +142,164 @@
                     </div>
                   </div>
 
-                  <div class="prescriptions-box">
-                    <div class="title-holder tabs">
-                      <h2 class="active">Total Prescriptions</h2>
-                    </div>
-                    <div class="overflow-dropdown">
-                      <div class="table-prescriptions-wrap">
-                        <table class="table-primary table-prescriptions-2">
-                          <tbody>
-                            <tr>
-                              <th>DATE WRITTEN</th>
-                              <th>TYPE</th>
-                              <th>SIZE</th>
-                              <th>NAME</th>
-                              <th>REFILLS REMAINING</th>
-                              <th>Download</th>
-                              <th>View Order</th>
-                              <th> Fax </th>
-                            </tr>
+                  <% if (result[0].SIZE && result[0].MED_TYPE) { %>
 
-                            <% for(let i=0; i < result.length; i++) { %>
-
+                    <div class="prescriptions-box">
+                      <div class="title-holder tabs">
+                        <h2 class="active">Total Prescriptions</h2>
+                      </div>
+                      <div class="overflow-dropdown">
+                        <div class="table-prescriptions-wrap">
+                          <table class="table-primary table-prescriptions-2">
+                            <tbody>
                               <tr>
-                                <td class="date"><%- result[i].DAY %></td>
-                                <td> <%- result[i].MED_TYPE %> </td>
-                                <td> <%- result[i].SIZE %> </td>
-                                <td><%- result[i].MEDICINE %></td>
-                                <td><%- result[i].REFILLS %></td>
-                                <td>
+                                <th>DATE WRITTEN</th>
+                                <th>TYPE</th>
+                                <th>SIZE</th>
+                                <th>NAME</th>
+                                <th>REFILLS REMAINING</th>
+                                <th>Download</th>
+                                <th>View Order</th>
+                                <th> Fax </th>
+                              </tr>
 
-                                  <style>
-                                    .download-link {
-                                      text-align: -webkit-center;
-                                    }
+                              <% for(let i=0; i < result.length; i++) { %>
 
-                                    @keyframes spin {
-                                      from {
-                                        transform: rotate(0deg);
+                                <tr>
+                                  <td class="date"><%- result[i].DAY %></td>
+                                  <td> <%- result[i].MED_TYPE %> </td>
+                                  <td> <%- result[i].SIZE %> </td>
+                                  <td><%- result[i].MEDICINE %></td>
+                                  <td><%- result[i].REFILLS %></td>
+                                  <td>
+
+                                    <style>
+                                      .download-link {
+                                        text-align: -webkit-center;
                                       }
 
-                                      to {
-                                        transform: rotate(360deg);
+                                      @keyframes spin {
+                                        from {
+                                          transform: rotate(0deg);
+                                        }
+
+                                        to {
+                                          transform: rotate(360deg);
+                                        }
                                       }
-                                    }
 
-                                    .spin {
-                                      animation: spin 2s linear infinite;
-                                    }
-                                  </style>
+                                      .spin {
+                                        animation: spin 2s linear infinite;
+                                      }
+                                    </style>
 
-                                  <a href="/download_file/<%- result[i].PATIENT_ID %>?day=<%- result[i].DAY %>&time=<%- result[i].TIME_STAMP %>"
-                                    class="download-link">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                      class="bi bi-download" viewBox="0 0 16 16">
-                                      <path
-                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                      <path
-                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                                    </svg>
-                                  </a>
-                                </td>
-                                <td>
-                                  <a
-                                    href="/order/<%- result[i].PATIENT_ID %>?day=<%- result[i].DAY %>&time=<%- result[i].TIME_STAMP %>">view
-                                    order</a>
-                                </td>
-                                <td> <a href="javascript:void(0)" data-patient-id="<%- result[i].PATIENT_ID %>"
-                                    data-day="<%- result[i].DAY %>" data-time="<%- result[i].TIME_STAMP %>"
-                                    onclick="sendFax(this)">
-                                    Fax to Pharmacy
+                                    <a href="/download_file/<%- result[i].PATIENT_ID %>?day=<%- result[i].DAY %>&time=<%- result[i].TIME_STAMP %>"
+                                      class="download-link">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-download" viewBox="0 0 16 16">
+                                        <path
+                                          d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path
+                                          d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                      </svg>
+                                    </a>
+                                  </td>
+                                  <td>
+                                    <a
+                                      href="/order/<%- result[i].PATIENT_ID %>?day=<%- result[i].DAY %>&time=<%- result[i].TIME_STAMP %>">view
+                                      order</a>
+                                  </td>
+                                  <td> <a href="javascript:void(0)" data-patient-id="<%- result[i].PATIENT_ID %>"
+                                      data-day="<%- result[i].DAY %>" data-time="<%- result[i].TIME_STAMP %>"
+                                      onclick="sendFax(this)">
+                                      Fax to Pharmacy
 
-                                  </a>
-                                </td>
+                                    </a>
+                                  </td>
 
 
-                                <script>
-                                  function sendFax(element) {
-                                    element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                  <script>
+                                    function sendFax(element) {
+                                      element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                       class="bi bi-arrow-repeat spin" viewBox="0 0 16 16">
                                       <path
                                         d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
                                       <path fill-rule="evenodd"
                                         d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
                                     </svg>`;
-                                    const patientId = element.getAttribute('data-patient-id');
-                                    const day = element.getAttribute('data-day');
-                                    const time = element.getAttribute('data-time');
-                                    const url = `/fax/${patientId}?day=${day}&time=${time}`;
-                                    let msg = document.getElementById('res');
-                                    const overlay = document.getElementById("overlay");
-                                    const popup = document.getElementById("popup");
-                                    const close = document.getElementById("close");
-                                    $.ajax({
-                                      url: url,
-                                      type: 'GET',
-                                      success: function (result) {
-                                        if (result.err_fax) {
-                                          msg.textContent = result.err_fax;
-                                          element.textContent = 'Retry'; // Change the text content to 'Retry'
-                                          overlay.style.display = "block";
-                                          popup.style.display = "block";
-                                          close.addEventListener("click", () => {
-                                            setTimeout(() => {
-                                              popup.style.display = "none";
-                                              overlay.style.display = "none";
-                                            }, 700);
-                                          });
-                                        } else {
-                                          msg.textContent = result;
-                                          element.textContent = 'Send Again';
-                                          overlay.style.display = "block";
-                                          popup.style.display = "block";
-                                          close.addEventListener("click", () => {
-                                            setTimeout(() => {
-                                              popup.style.display = "none";
-                                              overlay.style.display = "none";
-                                            }, 700);
-                                          });
+                                      const patientId = element.getAttribute('data-patient-id');
+                                      const day = element.getAttribute('data-day');
+                                      const time = element.getAttribute('data-time');
+                                      const url = `/fax/${patientId}?day=${day}&time=${time}`;
+                                      let msg = document.getElementById('res');
+                                      const overlay = document.getElementById("overlay");
+                                      const popup = document.getElementById("popup");
+                                      const close = document.getElementById("close");
+                                      $.ajax({
+                                        url: url,
+                                        type: 'GET',
+                                        success: function (result) {
+                                          if (result.err_fax) {
+                                            msg.textContent = result.err_fax;
+                                            element.textContent = 'Retry'; // Change the text content to 'Retry'
+                                            overlay.style.display = "block";
+                                            popup.style.display = "block";
+                                            close.addEventListener("click", () => {
+                                              setTimeout(() => {
+                                                popup.style.display = "none";
+                                                overlay.style.display = "none";
+                                              }, 700);
+                                            });
+                                          } else {
+                                            msg.textContent = result;
+                                            element.textContent = 'Send Again';
+                                            overlay.style.display = "block";
+                                            popup.style.display = "block";
+                                            close.addEventListener("click", () => {
+                                              setTimeout(() => {
+                                                popup.style.display = "none";
+                                                overlay.style.display = "none";
+                                              }, 700);
+                                            });
+                                          }
+                                        },
+                                        error: function (error) {
+                                          console.error('Error:', error);
                                         }
-                                      },
-                                      error: function (error) {
-                                        console.error('Error:', error);
+                                      });
+                                    }
+                                  </script>
+                                </tr>
+
+
+                                <% } %>
+
+
+                                  <script>
+                                    const dateElements = document.querySelectorAll('.date');
+
+                                    dateElements.forEach((dateElement) => {
+                                      const originalDate = dateElement.textContent;
+                                      const parts = originalDate.split('-');
+
+                                      if (parts.length === 3) {
+                                        const [year, month, day] = parts;
+                                        const formattedDate = `${day}/${month}/${year}`;
+                                        dateElement.textContent = formattedDate;
+                                      } else {
+                                        dateElement.textContent = 'Invalid date format';
                                       }
                                     });
-                                  }
-                                </script>
-                              </tr>
 
+                                  </script>
 
-                              <% } %>
-
-
-                              <script>
-                                const dateElements = document.querySelectorAll('.date');
-
-                                dateElements.forEach((dateElement) => {
-                                  const originalDate = dateElement.textContent;
-                                  const parts = originalDate.split('-');
-
-                                  if (parts.length === 3) {
-                                    const [year, month, day] = parts;
-                                    const formattedDate = `${day}/${month}/${year}`;
-                                    dateElement.textContent = formattedDate;
-                                  } else {
-                                    dateElement.textContent = 'Invalid date format';
-                                  }
-                                });
-
-                              </script>
-
-                          </tbody>
-                        </table>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    <% } %>
+
                 </div>
               </div>
             </div>
@@ -307,9 +311,9 @@
                     <div class="title-holder">
                       <h3 class="h2-title" style="color: rgb(226, 86, 86); margin-top: 15px; margin-left: 10px;">
                         <a class="btn btn-primary btn-medium" href="/create">
-                          Create New Prescription 
+                          Create New Prescription
                         </a>
-                        
+
                       </h3>
                       <div class="title-info">
                       </div>

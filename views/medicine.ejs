@@ -39,7 +39,7 @@
                 <h2 class="h1-title">Select the Prescription</h2>
                 <!-- <p>Select the prescription from the <%- table %></p> -->
                 <!-- <p>Select the prescription from the options below</p> -->
-                <p>Select the prescription from the <%= (()=> {
+                <p>Select the prescription from the <span style="color: red; font-size: 15px;"><%= (()=> {
                     function capitalizeFirstLetter(str) {
                     return str.charAt(0).toUpperCase() + str.slice(1);
                     }
@@ -52,7 +52,7 @@
 
                     // Call the formatTable function with the provided 'table' variable
                     return formatTable(table);
-                    })() %></p>
+                    })() %></span></p>
               </div>
               <div class="select-ingredients-wrap">
                 <ul class="tab-links"></ul>
